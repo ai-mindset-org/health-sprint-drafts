@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Sprint — Visual Direction Comparison</title>
+<meta name="description" content="3 visual interpretations of AI Mindset Health Sprint. June 2–14, 2026. Hosts: Ilya Gindin · Alex Povaliaev · Olya Konysheva.">
+<meta property="og:title" content="Health Sprint — 3 Visual Directions">
+<meta property="og:description" content="AI Mindset Health Sprint · June 2–14, 2026 · Compare 3 design directions for the same content and program.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ai-mindset-org.github.io/health-sprint-drafts/">
+<meta property="og:image" content="https://ai-mindset-org.github.io/health-sprint-drafts/assets/hub-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ai-mindset-org.github.io/health-sprint-drafts/assets/hub-cover.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0a0a0a;
+  --paper: #f5f4f0;
+  --muted: #777472;
+  --muted2: #bbb9b5;
+  --hair: rgba(10,10,10,0.12);
+  --hair2: rgba(10,10,10,0.06);
+  --red: #c0392b;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  letter-spacing: 0.01em;
+  min-height: 100vh;
+}
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+/* header */
+header {
+  border-bottom: 1px solid var(--hair);
+  padding: 24px 0;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.header-brand {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+}
+.header-badge {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--hair);
+  padding: 3px 10px;
+  color: var(--muted);
+}
+
+/* hero */
+.hero {
+  padding: clamp(60px, 8vw, 100px) 0 clamp(40px, 5vw, 64px);
+  border-bottom: 1px solid var(--hair);
+}
+.hero-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.hero-headline {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.hero-meta-sep { color: var(--muted2); }
+
+/* grid */
+.directions {
+  padding: clamp(48px, 6vw, 80px) 0;
+  border-bottom: 1px solid var(--hair);
+}
+.directions-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+.directions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--hair);
+  border: 1px solid var(--hair);
+}
+.direction-card {
+  background: var(--paper);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+}
+.direction-card:hover { background: #eeede9; }
+.direction-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+.direction-preview {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: var(--hair2);
+  border: 1px solid var(--hair);
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.direction-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.direction-preview-placeholder {
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: 0.04em;
+  text-align: center;
+  padding: 16px;
+  line-height: 1.5;
+}
+.direction-title {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.direction-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+.direction-link {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 8px 16px;
+  display: inline-block;
+  transition: background 0.12s, color 0.12s;
+  align-self: flex-start;
+  text-decoration: none;
+}
+.direction-card:hover .direction-link {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* preview image fallback patterns */
+.preview-d { background: linear-gradient(135deg, #0e0e0e 0%, #1a1a1a 100%); }
+.preview-f { background: linear-gradient(135deg, #0d0d0d 0%, #1c1010 100%); }
+.preview-g { background: linear-gradient(135deg, #1a1611 0%, #0d0a06 100%); }
+.preview-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* context */
+.context-section {
+  padding: clamp(48px, 6vw, 80px) 0;
+  border-bottom: 1px solid var(--hair);
+}
+.context-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.context-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.context-block h3 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.context-list {
+  list-style: none;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.context-list li::before { content: '— '; color: var(--muted2); }
+
+/* specs row */
+.specs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--hair);
+  margin-top: 16px;
+}
+.specs-cell {
+  padding: 16px 20px;
+  border-right: 1px solid var(--hair);
+  font-size: 12px;
+}
+.specs-cell:last-child { border-right: none; }
+.specs-cell-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.specs-cell-val { font-weight: 600; }
+
+/* cta row */
+.cta-row {
+  padding: clamp(48px, 6vw, 80px) 0;
+  border-bottom: 1px solid var(--hair);
+}
+.cta-inner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.cta-text { font-size: 14px; color: var(--muted); }
+.cta-btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  padding: 10px 24px;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+  display: inline-block;
+}
+.cta-btn:hover { background: var(--ink); color: var(--paper); }
+
+/* footer */
+footer {
+  padding: 32px 0;
+  border-top: 1px solid var(--hair);
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-left {
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: 0.04em;
+}
+.footer-right {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-right a {
+  font-size: 11px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.footer-right a:hover { color: var(--ink); }
+
+/* responsive */
+@media (max-width: 768px) {
+  .directions-grid { grid-template-columns: 1fr; }
+  .context-grid { grid-template-columns: 1fr; gap: 32px; }
+  .specs-row { grid-template-columns: 1fr; }
+  .specs-cell { border-right: none; border-bottom: 1px solid var(--hair); }
+  .specs-cell:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <a href="https://aimindset.org" class="header-brand" target="_blank" rel="noopener">AI Mindset</a>
+    <span class="header-badge">draft · internal review · 2026-05-12</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-label">health sprint · visual direction comparison</p>
+    <h1 class="hero-headline">choose direction.</h1>
+    <p class="hero-sub">3 visual interpretations of the same content and program. same hosts, same dates, same price — three aesthetic frames.</p>
+    <div class="hero-meta">
+      <span>health sprint</span>
+      <span class="hero-meta-sep">·</span>
+      <span>2 июня — 14 июня 2026</span>
+      <span class="hero-meta-sep">·</span>
+      <span>ilya gindin × olya konysheva × alex povaliaev</span>
+      <span class="hero-meta-sep">·</span>
+      <span>confirmed guest: tonya zhukova</span>
+    </div>
+  </div>
+</section>
+
+<section class="directions">
+  <div class="wrap">
+    <p class="directions-label">01 — 03 · directions</p>
+    <div class="directions-grid">
+
+      <!-- Direction D -->
+      <a href="./system-spec/" class="direction-card">
+        <div class="direction-num">D · 01 //</div>
+        <div class="direction-preview preview-d">
+          <img src="./system-spec/preview.png" alt="System Spec preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="direction-preview-placeholder" style="display:none; color:rgba(255,255,255,0.2);">system spec<br>minimal dark</div>
+        </div>
+        <div class="direction-title">system spec minimal</div>
+        <div class="direction-desc">dark background, JetBrains Mono only, dot-grid texture, technical specification table, sigil avatars. operator aesthetic. zero-ornamentation.</div>
+        <span class="direction-link">open →</span>
+      </a>
+
+      <!-- Direction F -->
+      <a href="./brutalist/" class="direction-card">
+        <div class="direction-num">F · 02 //</div>
+        <div class="direction-preview preview-f">
+          <img src="./brutalist/preview.png" alt="Brutalist Clinical preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="direction-preview-placeholder" style="display:none; color:rgba(255,255,255,0.2);">brutalist<br>clinical</div>
+        </div>
+        <div class="direction-title">brutalist clinical</div>
+        <div class="direction-desc">stark black/white, heavy borders, AGENT_001 registry table, uppercase labels, industrial typography. clinical protocol language. maximum contrast.</div>
+        <span class="direction-link">open →</span>
+      </a>
+
+      <!-- Direction G -->
+      <a href="./anatomy/" class="direction-card">
+        <div class="direction-num">G · 03 //</div>
+        <div class="direction-preview preview-g">
+          <img src="./anatomy/preview.png" alt="Editorial Anatomy preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="direction-preview-placeholder" style="display:none; color:rgba(255,255,255,0.2);">editorial<br>anatomy</div>
+        </div>
+        <div class="direction-title">editorial anatomy</div>
+        <div class="direction-desc">Garamond serif, warm sepia/paper tones, anatomical illustration overlays, § section markers, editorial rhythm. museum/journal aesthetic.</div>
+        <span class="direction-link">open →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="context-section">
+  <div class="wrap">
+    <p class="context-label">context · sprint overview</p>
+    <div class="context-grid">
+      <div class="context-block">
+        <h3>hosts (confirmed)</h3>
+        <ul class="context-list">
+          <li>Илья Гиндин @igindin — co-lead · контент + фасилитация</li>
+          <li>Оля Конышева @olly_konnichiwa — co-lead · методология</li>
+          <li>Александр Поваляев @alex_named — host · AI Mindset</li>
+          <li>Тоня Жукова @zhuuki — guest · C2 workshop · confirmed</li>
+        </ul>
+        <h3 style="margin-top: 24px;">program</h3>
+        <ul class="context-list">
+          <li>C1 · старт + карта — вт 2 июня 17:00 МСК</li>
+          <li>C2 · personal data layer · Тоня — чт 4 июня</li>
+          <li>focus · body doubling — сб 6 июня 12:00</li>
+          <li>C3 · insight engine — вт 9 июня</li>
+          <li>C4 · behavior + challenge start — чт 11 июня</li>
+          <li>C5 · вертикали — сб 13 июня</li>
+          <li>C6 · demo day — вс 14 июня</li>
+          <li>7-day live test — 11–17 июня</li>
+        </ul>
+      </div>
+      <div class="context-block">
+        <h3>pricing</h3>
+        <ul class="context-list">
+          <li>€190 early bird — health-чат AIM + хакатон</li>
+          <li>€290 standard — открытый доступ</li>
+          <li>−20% реферальная скидка</li>
+        </ul>
+        <h3 style="margin-top: 24px;">enrollment</h3>
+        <ul class="context-list">
+          <li>записаться → <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener" style="color: var(--ink);">t.me/ai_mind_set_team</a></li>
+        </ul>
+        <h3 style="margin-top: 24px;">what's the same across all 3</h3>
+        <ul class="context-list">
+          <li>identical content and program</li>
+          <li>identical speaker lineup</li>
+          <li>identical pricing</li>
+          <li>identical enrollment URL</li>
+        </ul>
+        <div class="specs-row" style="margin-top: 20px;">
+          <div class="specs-cell">
+            <div class="specs-cell-label">start</div>
+            <div class="specs-cell-val">2 июня 2026</div>
+          </div>
+          <div class="specs-cell">
+            <div class="specs-cell-label">duration</div>
+            <div class="specs-cell-val">2 weeks</div>
+          </div>
+          <div class="specs-cell">
+            <div class="specs-cell-label">cohort</div>
+            <div class="specs-cell-val">40–50 max</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-row">
+  <div class="wrap">
+    <div class="cta-inner">
+      <p class="cta-text">enrollment open · записаться через Telegram</p>
+      <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener" class="cta-btn">[ записаться на спринт ]</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-left">
+      AI Mindset · Health Sprint · s5 · June 2026 · draft comparison hub
+      <br>last updated 2026-05-12
+    </div>
+    <div class="footer-right">
+      <a href="https://aimindset.org" target="_blank" rel="noopener">aimindset.org</a>
+      <a href="https://t.me/aimindset" target="_blank" rel="noopener">telegram</a>
+      <a href="https://t.me/igindin" target="_blank" rel="noopener">@igindin</a>
+      <a href="https://t.me/olly_konnichiwa" target="_blank" rel="noopener">@olly_konnichiwa</a>
+      <a href="https://github.com/ai-mindset-org/health-sprint-drafts" target="_blank" rel="noopener">github</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Sprint — AI Mindset · июнь 2026</title>
+<meta name="description" content="2 недели в AI Mindset — собери систему на своих данных и научись строить для кого угодно. 2–14 июня 2026.">
+<meta property="og:title" content="Health Sprint — Самый честный AI-проект — это ты">
+<meta property="og:description" content="2 недели в AI Mindset — собери систему на своих данных и научись строить для кого угодно.">
+<meta property="og:image" content="assets/og-cover.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://space-health-sprint.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/og-cover.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<style>
+/* ─── RESET & BASE ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #fbfaf6;
+  --paper-warm: #f5f2ec;
+  --ink: #0f0f0f;
+  --muted: #7d7670;
+  --hair: rgba(15,15,15,0.10);
+  --hair-soft: rgba(15,15,15,0.06);
+  --red: #b91c1c;
+  --red-soft: #d4444e;
+  --sepia: #b8a78c;
+  --sepia-light: #d6c9b3;
+
+  --display: "EB Garamond", "Cormorant Garamond", Georgia, serif;
+  --body: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --label: "Inter", system-ui, sans-serif;
+
+  --size-display: clamp(56px, 7vw, 112px);
+  --size-h1: clamp(36px, 4.5vw, 64px);
+  --size-h2: clamp(22px, 2.5vw, 32px);
+  --size-h3: clamp(18px, 2vw, 24px);
+  --size-body: 17px;
+  --size-meta: 13px;
+
+  --max-w: 860px;
+  --gutter: clamp(24px, 5vw, 80px);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  font-size: var(--size-body);
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* HARD KILL italic globally per design spec */
+em, i, cite { font-style: normal !important; }
+
+/* ─── TYPOGRAPHY UTILITIES ──────────────────────────────────────────────────── */
+.display {
+  font-family: var(--display);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-style: normal;
+}
+.serif { font-family: var(--display); font-style: normal; }
+.mono { font-family: var(--body); }
+.sans { font-family: var(--label); }
+.muted { color: var(--muted); }
+.red { color: var(--red); }
+
+/* ─── SECTION LABELS ──────────────────────────────────────────────────────── */
+.section-label {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--hair);
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────────────────────────── */
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(64px, 8vw, 120px) var(--gutter);
+}
+.section + .section {
+  border-top: 1px solid var(--hair);
+}
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── ANATOMY BACKGROUNDS ────────────────────────────────────────────────── */
+.bg-anatomy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.bg-anatomy img {
+  position: absolute;
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+  object-fit: cover;
+  transition: opacity 0.3s;
+}
+/* Hero — heart centered-right */
+#hero .bg-anatomy img { right: -5%; top: -10%; width: 65%; height: 120%; object-fit: contain; object-position: right center; }
+/* Context — lungs centered */
+#context .bg-anatomy img { right: -8%; top: -5%; width: 70%; height: 110%; object-fit: contain; object-position: right center; opacity: 0.09; }
+/* Mechanism — hand left */
+#mechanism .bg-anatomy img { left: -5%; top: -5%; width: 60%; height: 110%; object-fit: contain; object-position: left center; opacity: 0.09; }
+/* Tech spec — eye */
+#techspec .bg-anatomy img { right: 0; top: 0; width: 55%; height: 100%; object-fit: contain; object-position: right top; opacity: 0.08; }
+/* Calendar — brain */
+#calendar .bg-anatomy img { left: -5%; top: -10%; width: 55%; height: 120%; object-fit: contain; object-position: left center; opacity: 0.09; }
+/* Stack — spine */
+#stack .bg-anatomy img { right: -5%; top: -5%; width: 50%; height: 110%; object-fit: contain; object-position: right center; opacity: 0.08; }
+/* Hosts — hand again, faded more */
+#hosts .bg-anatomy img { left: 50%; top: -5%; transform: translateX(-50%); width: 90%; height: 110%; object-fit: contain; opacity: 0.07; }
+/* Final CTA — fullbody */
+#enrollment .bg-anatomy img { left: 50%; top: 50%; transform: translate(-50%, -50%); width: 80%; height: 130%; object-fit: contain; opacity: 0.08; }
+
+/* ─── HIGHLIGHT SPAN ──────────────────────────────────────────────────────── */
+.hl {
+  background: var(--red);
+  color: var(--paper);
+  padding: 2px 7px;
+  display: inline;
+  line-height: 1.5;
+}
+
+/* ─── MASTHEAD ────────────────────────────────────────────────────────────── */
+#masthead {
+  padding: 14px var(--gutter);
+  border-bottom: 1px solid var(--hair);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--paper);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.masthead-brand {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.masthead-meta {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.masthead-nav {
+  display: flex;
+  gap: 20px;
+  font-family: var(--label);
+  font-size: 12px;
+  color: var(--muted);
+}
+.masthead-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.masthead-nav a:hover { color: var(--ink); }
+
+/* ─── CTA BRACKET BUTTON ─────────────────────────────────────────────────── */
+.cta-bracket {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  font-family: var(--display);
+  font-size: clamp(15px, 1.6vw, 20px);
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  padding: 12px 28px;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.01em;
+}
+.cta-bracket:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+.cta-bracket.red-cta {
+  border-color: var(--red);
+  color: var(--red);
+}
+.cta-bracket.red-cta:hover {
+  background: var(--red);
+  color: var(--paper);
+}
+
+/* ─── HERO ────────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  background: var(--paper);
+  padding-top: clamp(80px, 10vw, 140px);
+  padding-bottom: clamp(80px, 10vw, 140px);
+}
+.hero-inner { max-width: var(--max-w); margin: 0 auto; position: relative; z-index: 2; }
+.hero-chapter {
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-chapter::after { content: ''; width: 32px; height: 1px; background: var(--red); }
+.hero-headline {
+  font-family: var(--display);
+  font-size: var(--size-display);
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 32px;
+  max-width: 780px;
+}
+.hero-sub {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 560px;
+  margin-bottom: 40px;
+}
+.hero-meta {
+  font-family: var(--body);
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 20px;
+  letter-spacing: 0.03em;
+}
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ─── PRICING BADGES ─────────────────────────────────────────────────────── */
+.price-badge {
+  display: inline-flex;
+  gap: 6px;
+  align-items: baseline;
+}
+.price-amount {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.price-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--body);
+}
+
+/* ─── BODY TEXT ──────────────────────────────────────────────────────────── */
+.body-large { font-size: 18px; line-height: 1.75; }
+.body-block { max-width: 640px; }
+.body-block p + p { margin-top: 20px; }
+.body-block p { color: var(--ink); }
+
+/* ─── 3-STEP ─────────────────────────────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  margin-top: 48px;
+}
+.step-card {
+  border-top: 1px solid var(--hair);
+  padding-top: 24px;
+}
+.step-num {
+  font-family: var(--display);
+  font-size: 13px;
+  color: var(--red);
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+.step-title {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.step-body { font-size: 15px; line-height: 1.65; color: var(--muted); }
+
+/* ─── TECH SPEC TABLE ────────────────────────────────────────────────────── */
+.spec-table {
+  width: 100%;
+  font-family: var(--body);
+  font-size: 14px;
+  border-collapse: collapse;
+  margin-top: 32px;
+}
+.spec-table tr {
+  border-bottom: 1px solid var(--hair);
+}
+.spec-table tr:first-child { border-top: 1px solid var(--hair); }
+.spec-table td {
+  padding: 10px 0;
+  vertical-align: top;
+}
+.spec-table td:first-child {
+  color: var(--muted);
+  width: 220px;
+  padding-right: 24px;
+  white-space: nowrap;
+}
+.spec-table td:last-child { color: var(--ink); }
+.spec-val-em { color: var(--red); }
+
+/* ─── CALENDAR GRID ──────────────────────────────────────────────────────── */
+.cal-title {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.cal-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+.cal-week-label {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 32px;
+}
+.cal-day {
+  border: 1px solid var(--hair);
+  padding: 14px 10px;
+  min-height: 100px;
+  position: relative;
+  cursor: default;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--paper);
+}
+.cal-day:hover { border-color: var(--sepia); background: var(--paper-warm); }
+.cal-day.has-session {
+  border-color: var(--red);
+  background: rgba(185, 28, 28, 0.03);
+}
+.cal-day.has-session::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+.cal-day-num {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1;
+}
+.cal-day-date { font-size: 10px; color: var(--muted); margin-top: 2px; font-family: var(--label); }
+.cal-day-session {
+  font-size: 10px;
+  color: var(--red);
+  margin-top: 6px;
+  font-family: var(--body);
+  line-height: 1.3;
+}
+.cal-day-badge {
+  display: inline-block;
+  background: var(--red);
+  color: var(--paper);
+  font-size: 9px;
+  padding: 2px 5px;
+  margin-top: 4px;
+  font-family: var(--label);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.cal-day.rest { opacity: 0.5; }
+
+/* ─── STACK LAYERS ───────────────────────────────────────────────────────── */
+.stack-layers {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+  border: 1px solid var(--hair);
+  margin-top: 40px;
+}
+.stack-layer {
+  padding: 28px 24px;
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.stack-layer:last-child { border-right: none; }
+.stack-layer-label {
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.stack-layer-title {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+.stack-list {
+  list-style: none;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.stack-list li::before {
+  content: '→ ';
+  color: var(--red);
+}
+
+/* ─── HOST CARDS ─────────────────────────────────────────────────────────── */
+.hosts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+.host-card {
+  border: 1px solid var(--hair);
+  padding: 28px;
+  position: relative;
+}
+.host-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 28px;
+  width: 32px;
+  height: 2px;
+  background: var(--red);
+}
+.host-sigil {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--sepia-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--sepia);
+  margin-bottom: 20px;
+  background: var(--paper-warm);
+}
+.host-name {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.host-handle {
+  font-family: var(--body);
+  font-size: 12px;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+.host-credentials {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.host-credentials p + p { margin-top: 6px; }
+
+/* ─── SPEAKERS TABLE ─────────────────────────────────────────────────────── */
+.speakers-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--body);
+  font-size: 13px;
+  margin-top: 32px;
+}
+.speakers-table th {
+  text-align: left;
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--ink);
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.speakers-table td {
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--hair);
+  vertical-align: top;
+}
+.speakers-table td.speaker-name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.speakers-table .status-confirmed { color: var(--red); }
+.speakers-table .status-pending { color: var(--muted); }
+.speakers-table .status-open { color: var(--sepia); }
+.speakers-table .open-slot td { color: var(--sepia); opacity: 0.7; }
+
+/* ─── PRICING CARDS ──────────────────────────────────────────────────────── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.pricing-card {
+  border: 1px solid var(--hair);
+  padding: 36px 32px;
+  position: relative;
+  background: var(--paper);
+}
+.pricing-card.featured { border-color: var(--red); }
+.pricing-card .heart-icon {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: var(--red);
+}
+.pricing-tier {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.pricing-amount {
+  font-family: var(--display);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.pricing-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: 20px;
+}
+.pricing-includes {
+  list-style: none;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 2;
+}
+.pricing-includes li::before { content: '— '; }
+
+/* ─── FAQ ─────────────────────────────────────────────────────────────────── */
+.faq-list { margin-top: 40px; }
+.faq-item {
+  border-bottom: 1px solid var(--hair);
+  padding: 24px 0;
+}
+.faq-item:first-child { border-top: 1px solid var(--hair); }
+.faq-q {
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.faq-q .roman {
+  font-size: 14px;
+  color: var(--red);
+  min-width: 20px;
+}
+.faq-a {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+  padding-left: 34px;
+}
+
+/* ─── ENROLLMENT / FINAL CTA ─────────────────────────────────────────────── */
+#enrollment {
+  background: var(--paper-warm);
+  text-align: center;
+}
+.enrollment-headline {
+  font-family: var(--display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+.enrollment-body {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  padding: 40px var(--gutter);
+  border-top: 1px solid var(--hair);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+}
+.footer-logo { display: flex; align-items: center; gap: 10px; }
+.footer-logo img { height: 28px; width: 28px; object-fit: contain; }
+.footer-brand {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-family: var(--body);
+  font-size: 12px;
+  justify-content: center;
+}
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--ink); }
+.footer-copy {
+  font-family: var(--display);
+  font-size: 13px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ─── MID-PAGE CTA ────────────────────────────────────────────────────────── */
+.midpage-cta {
+  text-align: center;
+  padding: clamp(48px, 6vw, 80px) var(--gutter);
+  border-top: 1px solid var(--hair);
+  background: var(--paper);
+}
+.midpage-cta h3 {
+  font-family: var(--display);
+  font-size: clamp(24px, 2.8vw, 36px);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.midpage-cta .sub {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* ─── WHAT YOU GET ────────────────────────────────────────────────────────── */
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  margin-top: 40px;
+  border: 1px solid var(--hair);
+}
+.outcome-card {
+  padding: 28px 24px;
+  border-right: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.outcome-num {
+  font-family: var(--display);
+  font-size: 11px;
+  color: var(--red);
+  margin-bottom: 12px;
+  letter-spacing: 0.08em;
+}
+.outcome-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.outcome-body { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* ─── WHO IS IT FOR ──────────────────────────────────────────────────────── */
+.for-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 48px;
+}
+@media (max-width: 640px) { .for-grid { grid-template-columns: 1fr; } }
+.for-block-label {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hair);
+}
+.for-block-body { font-size: 15px; color: var(--muted); line-height: 1.75; }
+
+/* ─── PROGRAM WEEKS ──────────────────────────────────────────────────────── */
+.program-weeks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 48px;
+}
+@media (max-width: 640px) { .program-weeks { grid-template-columns: 1fr; } }
+.week-label {
+  font-family: var(--label);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hair);
+}
+.session-item {
+  margin-bottom: 28px;
+  padding-left: 16px;
+  border-left: 2px solid var(--hair);
+  transition: border-color 0.2s;
+}
+.session-item:hover { border-left-color: var(--red); }
+.session-tag {
+  font-family: var(--body);
+  font-size: 11px;
+  color: var(--red);
+  margin-bottom: 5px;
+  letter-spacing: 0.05em;
+}
+.session-title {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.session-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ─── DIVIDER ─────────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: var(--hair);
+  margin: 0;
+}
+
+/* ─── PAPER GRAIN TEXTURE ────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ─── RESPONSIVE FOOTER ───────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  footer { grid-template-columns: 1fr; gap: 16px; text-align: center; }
+  .footer-copy { text-align: center; }
+}
+@media (max-width: 480px) {
+  .cal-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ─── SPEAKERS OPEN SLOT ROW ─────────────────────────────────────────────── */
+.open-slot-row td { color: var(--sepia-light) !important; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 00 · MASTHEAD
+══════════════════════════════════════════════════════════════════════════ -->
+<header id="masthead">
+  <a href="#hero" class="masthead-brand">Health Sprint</a>
+  <span class="masthead-meta">AI Mindset · Sprint №5 · Summer 2026</span>
+  <nav class="masthead-nav">
+    <a href="#program">программа</a>
+    <a href="#hosts">ведущие</a>
+    <a href="#pricing">цена</a>
+    <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener">записаться</a>
+  </nav>
+</header>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 01 · HERO
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="hero" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-hero-heart.png" alt="" aria-hidden="true">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-chapter">§ 01 · Hero</div>
+    <h1 class="hero-headline display">Самый честный<br>AI-проект —<br>это ты.</h1>
+    <p class="hero-sub">
+      2 недели в AI Mindset — собери систему на своих данных
+      и научись строить для кого угодно.
+    </p>
+    <div class="hero-cta-row">
+      <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener" class="cta-bracket red-cta">[ записаться на спринт ]</a>
+      <span class="hero-meta">2 июня · 2 недели · €190 / €290</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 02 · CONTEXT (TENSION)
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="context" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-lungs.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 02 · Напряжение</div>
+    <div class="body-block body-large">
+      <p>Ты знаешь, как это должно работать.</p>
+      <p>Сон, перерывы, питание, движение. Никакой ракетной науки.</p>
+      <p>
+        И всё равно ничего не меняется — потому что знать
+        и <span class="hl">увидеть на своих данных</span> — это разные вещи.
+      </p>
+      <p>
+        Оля — сертифицированный нутрициолог, инструктор дыхательных практик.
+        Строит системы профессионально. И всё равно ничего не менялось,
+        пока она не загрузила данные за месяц в AI и не увидела:
+        каждая среда — провал по энергии. Несколько звонков подряд — и она в минусе до конца дня.
+      </p>
+      <p>
+        Не потому что не знала. Потому что не видела — на своих данных.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 03 · MECHANISM
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="mechanism" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-hand.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 03 · Подход</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 24px;">Вот как это работает.</h2>
+    <div class="body-block" style="font-size: 17px;">
+      <p>
+        Ты берёшь свои данные — анализы, трекер, календарь, дневник.
+        Загружаешь в AI. Задаёшь правильные вопросы.
+      </p>
+      <p>
+        И видишь паттерн — конкретно про себя, не про среднего человека.
+        Почему именно у тебя по средам нет сил.
+        Почему именно у тебя несколько звонков подряд — и ты в минусе до конца дня.
+      </p>
+      <p>
+        Когда видишь это — ты знаешь, что менять.
+        Система вырастает из понимания, не наоборот.
+      </p>
+      <p style="color: var(--muted); font-size: 14px; margin-top: 20px;">
+        AI здесь — thinking partner, не доктор.
+        Медицинские решения — только с врачом.
+      </p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">I.</div>
+        <div class="step-title serif">Собери данные</div>
+        <div class="step-body">
+          Три уровня: телефон + дневник / анализы + документы / WHOOP Oura Garmin.
+          Девайс не нужен — начнём с тем, что есть.
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">II.</div>
+        <div class="step-title serif">Найди паттерн</div>
+        <div class="step-body">
+          Промпт-паттерны для работы с health-контекстом.
+          AI как усилитель — не как доктор.
+          Один конкретный инсайт про себя.
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">III.</div>
+        <div class="step-title serif">Проверь в жизни</div>
+        <div class="step-body">
+          7-day live test во второй неделе.
+          Один коммитмент. Группа держит.
+          Инсайт → гипотеза → реальное изменение.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § ДЛЯ КОГО
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="forwhom" class="section">
+  <div class="container">
+    <div class="section-label">§ 03.5 · Для кого</div>
+    <div class="for-grid">
+      <div class="for-block">
+        <div class="for-block-label">→ только начинаешь с health-данными</div>
+        <div class="for-block-body">
+          <p>
+            Слышал про WHOOP и Oura, но так и не купил — непонятно, что с этим делать.
+            Или смотришь на цифры Apple Health и не знаешь, что спрашивать.
+          </p>
+          <p style="margin-top: 14px;">
+            Девайс не нужен. Начнём с того, что уже есть: телефон, анализы, дневник.
+            К концу ты поймёшь, какие данные тебе нужны — и нужны ли вообще.
+          </p>
+        </div>
+      </div>
+      <div class="for-block">
+        <div class="for-block-label">→ данные есть, но системы нет</div>
+        <div class="for-block-body">
+          <p>
+            Ты носишь WHOOP или Oura. Следишь за сном. Иногда смотришь на HRV.
+            Знаешь это ощущение — чувствуешь себя нормально,
+            а Recovery говорит 30%? Или наоборот: цифры зелёные, а к вечеру нет сил.
+          </p>
+          <p style="margin-top: 14px;">
+            Цифры и ощущения — это две разные истории. Приложение видит одну из них.
+            Мы выйдем за пределы встроенной аналитики.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § ЧТО ТЫ ПОЛУЧИШЬ
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="outcomes" class="section">
+  <div class="container">
+    <div class="section-label">§ 04 · Результаты</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 8px;">Что ты получишь.</h2>
+    <div class="outcomes-grid">
+      <div class="outcome-card">
+        <div class="outcome-num">01 →</div>
+        <div class="outcome-title serif">Твой health-портрет</div>
+        <div class="outcome-body">
+          Документ с паттернами, которые ты нашёл в своих данных.
+          Что на тебя влияет, что нет.
+          Его можно передать AI — и он будет отвечать про тебя, а не в среднем.
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">02 →</div>
+        <div class="outcome-title serif">Один инсайт</div>
+        <div class="outcome-body">
+          Не набор советов. Конкретное наблюдение про себя:
+          «когда X — у меня Y, поэтому я меняю Z».
+          Одно изменение, выбранное на основе данных.
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">03 →</div>
+        <div class="outcome-title serif">Понимание стека</div>
+        <div class="outcome-body">
+          Что тебе реально нужно — а что нет.
+          Что купить, что скачать, что просто начать делать.
+          Не чужой протокол — твой.
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">04 →</div>
+        <div class="outcome-title serif">Живой опыт</div>
+        <div class="outcome-body">
+          Спикеры не читают лекции. Они разбирают свои кейсы:
+          что нашли, что изменили, что сломалось и пришлось переделать.
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">opt →</div>
+        <div class="outcome-title serif">Прототип для других</div>
+        <div class="outcome-body">
+          Для тех, кто думает в продукт: упакуешь логику,
+          которую собрал на себе, в прототип для другого клиента.
+          Та же архитектура — другой человек.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     MID-PAGE CTA
+══════════════════════════════════════════════════════════════════════════ -->
+<div class="midpage-cta">
+  <h3 class="serif">Готов? Мест немного.</h3>
+  <p class="sub mono">2 июня · €190 early bird / €290 стандарт</p>
+  <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener" class="cta-bracket">[ записаться на спринт ]</a>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 04 · TECHNICAL SPECIFICATIONS
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="techspec" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-eye.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 04 · Technical Specifications</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 8px;">Protocol Sheet</h2>
+    <table class="spec-table">
+      <tr><td>protocol_id</td><td>AIM/S5/HEALTH-SPRINT/2026.06</td></tr>
+      <tr><td>classification</td><td>cohort · live · async-chat · ai-augmented</td></tr>
+      <tr><td>cohort_dates</td><td class="spec-val-em">2026-06-02 — 2026-06-14</td></tr>
+      <tr><td>sessions</td><td>6 core + 1 focus + 7-day challenge</td></tr>
+      <tr><td>session_length</td><td>60–75 min core / 90 min focus + demo</td></tr>
+      <tr><td>data_sources</td><td>wearables · labs · journals · calendar · screen-time · cycle data</td></tr>
+      <tr><td>entry_barrier</td><td>zero — works with phone + diary only</td></tr>
+      <tr><td>ai_tools</td><td>chatgpt · claude · gemini · custom skills · mcp servers</td></tr>
+      <tr><td>stack_layers</td><td>ingestion / normalization / insight / habit / output</td></tr>
+      <tr><td>recordings</td><td>permanent · downloadable</td></tr>
+      <tr><td>cohort_size</td><td>40–50 participants (target)</td></tr>
+      <tr><td>office_hours</td><td>2× — after C2 and C4, 60 min each</td></tr>
+      <tr><td>prototype_track</td><td>optional — brief → data → insight → habit → validation</td></tr>
+      <tr><td>pricing.early</td><td class="spec-val-em">€190.00 (health-чат + хакатон aудитория)</td></tr>
+      <tr><td>pricing.std</td><td>€290.00 (open access)</td></tr>
+      <tr><td>referral</td><td>−20% on shared code</td></tr>
+      <tr><td>language</td><td>Russian (RU) · materials bilingual</td></tr>
+    </table>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 05 · 14-DAY CALENDAR
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="calendar" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-brain.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 05 · Programme Calendar</div>
+    <div class="cal-title serif">Fourteen Days</div>
+    <div class="cal-subtitle mono">June 2026 · Moscow time (UTC+3)</div>
+
+    <div class="cal-week-label">Week I — Собери контекст</div>
+    <div class="cal-grid">
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">2</div>
+        <div class="cal-day-date">вт</div>
+        <div class="cal-day-session">17:00 МСК</div>
+        <span class="cal-day-badge">C1</span>
+        <div class="cal-day-session">Старт + карта</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">3</div>
+        <div class="cal-day-date">ср</div>
+      </div>
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">4</div>
+        <div class="cal-day-date">чт</div>
+        <div class="cal-day-session">17:00 МСК</div>
+        <span class="cal-day-badge">C2</span>
+        <div class="cal-day-session">Data layer · Тоня Жукова</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">5</div>
+        <div class="cal-day-date">пт</div>
+      </div>
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">6</div>
+        <div class="cal-day-date">сб</div>
+        <div class="cal-day-session">12:00 МСК</div>
+        <span class="cal-day-badge" style="background: var(--muted);">FOCUS</span>
+        <div class="cal-day-session">Body doubling</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">7</div>
+        <div class="cal-day-date">вс</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">8</div>
+        <div class="cal-day-date">пн</div>
+      </div>
+    </div>
+
+    <div class="cal-week-label">Week II — Понимай и действуй</div>
+    <div class="cal-grid">
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">9</div>
+        <div class="cal-day-date">вт</div>
+        <div class="cal-day-session">17:00 МСК</div>
+        <span class="cal-day-badge">C3</span>
+        <div class="cal-day-session">Insight engine</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">10</div>
+        <div class="cal-day-date">ср</div>
+      </div>
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">11</div>
+        <div class="cal-day-date">чт</div>
+        <div class="cal-day-session">17:00 МСК</div>
+        <span class="cal-day-badge">C4</span>
+        <div class="cal-day-session">Behavior change + Challenge start</div>
+      </div>
+      <div class="cal-day has-session" style="border-color: var(--sepia);">
+        <div class="cal-day-num serif">12</div>
+        <div class="cal-day-date">пт</div>
+        <span class="cal-day-badge" style="background: var(--sepia);">DAY 2</span>
+        <div class="cal-day-session" style="color: var(--sepia);">7-day live test</div>
+      </div>
+      <div class="cal-day has-session">
+        <div class="cal-day-num serif">13</div>
+        <div class="cal-day-date">сб</div>
+        <div class="cal-day-session">12:00 МСК</div>
+        <span class="cal-day-badge">C5</span>
+        <div class="cal-day-session">Вертикали</div>
+      </div>
+      <div class="cal-day has-session" style="border-color: var(--red); background: rgba(185,28,28,0.05);">
+        <div class="cal-day-num serif" style="color: var(--red);">14</div>
+        <div class="cal-day-date">вс</div>
+        <div class="cal-day-session">12:00 МСК</div>
+        <span class="cal-day-badge">DEMO</span>
+        <div class="cal-day-session" style="color: var(--red);">Demo Day</div>
+      </div>
+      <div class="cal-day rest">
+        <div class="cal-day-num serif">15</div>
+        <div class="cal-day-date">пн</div>
+        <div class="cal-day-session" style="color: var(--sepia);">challenge end</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 06 · PROGRAMME (WEEKS)
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="program" class="section">
+  <div class="container">
+    <div class="section-label">§ 06 · Программа</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 8px;">Как устроен спринт.</h2>
+    <div class="program-weeks">
+      <div>
+        <div class="week-label">Неделя 1 — Собери контекст</div>
+        <div class="session-item">
+          <div class="session-tag">C1 · Вт 2 июня · 17:00</div>
+          <div class="session-title serif">Старт + карта территории</div>
+          <div class="session-body">
+            AI как thinking partner, карта стека, запуск prototype-track.
+            Практическая настройка инструментов.
+            Дисклеймер: AI — не доктор.
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-tag">C2 · Чт 4 июня · 17:00</div>
+          <div class="session-title serif">Personal data layer</div>
+          <div class="session-body">
+            Три уровня входа: без девайса / с анализами / с гаджетом.
+            Неочевидные источники: календарь, screen time, данные цикла.
+            <span style="color: var(--red);">Спикер: Тоня Жукова.</span>
+            Каждый уходит с первыми данными в руках.
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-tag">FOCUS · Сб 6 июня · 12:00</div>
+          <div class="session-title serif">Body doubling</div>
+          <div class="session-body">
+            Все одновременно работают со своими данными.
+            Камеры включены. Илья и Оля рядом.
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="week-label">Неделя 2 — Инсайт → действие</div>
+        <div class="session-item">
+          <div class="session-tag">C3 · Вт 9 июня · 17:00</div>
+          <div class="session-title serif">Insight engine</div>
+          <div class="session-body">
+            Промпт-паттерны для health-контекста.
+            Как не получать «AI-гороскоп».
+            Спикер разбирает свой реальный кейс.
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-tag">C4 · Чт 11 июня · 17:00</div>
+          <div class="session-title serif">Behavior change + старт Challenge</div>
+          <div class="session-body">
+            Твой инсайт + формулировка гипотезы «если X → Y».
+            Первый коммитмент. Группа запускает неделю вместе.
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-tag">C5 · Сб 13 июня · 12:00</div>
+          <div class="session-title serif">Вертикали и карта возможностей</div>
+          <div class="session-body">
+            Women's health / mental health / longevity / sleep.
+            Нишевые спикеры из практики.
+          </div>
+        </div>
+        <div class="session-item" style="border-left-color: var(--red);">
+          <div class="session-tag" style="color: var(--red);">C6 · Вс 14 июня · 12:00</div>
+          <div class="session-title serif" style="color: var(--red);">Demo Day</div>
+          <div class="session-body">
+            Insight-demo: каждый рассказывает что увидел.
+            Prototype-demo: для тех, кто шёл билдер-треком.
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="session-tag">7-day live test · 11–17 июня</div>
+          <div class="session-title serif">Challenge неделя</div>
+          <div class="session-body">
+            Один коммитмент. Ежедневный чекин в чате.
+            «Сделал / не сделал / что заметил». Группа держит.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 06 · TECH STACK
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="stack" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-spine.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 06 · Stack</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 8px;">Стек спринта.</h2>
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 0;">Четыре слоя от данных до действия.</p>
+    <div class="stack-layers">
+      <div class="stack-layer">
+        <div class="stack-layer-label">Layer 01</div>
+        <div class="stack-layer-title serif">Data</div>
+        <ul class="stack-list">
+          <li>wearables (WHOOP / Oura / Garmin)</li>
+          <li>Apple Health export</li>
+          <li>lab results + blood panels</li>
+          <li>journal / diary</li>
+          <li>calendar + screen-time</li>
+          <li>cycle data</li>
+          <li>weather / pressure</li>
+        </ul>
+      </div>
+      <div class="stack-layer">
+        <div class="stack-layer-label">Layer 02</div>
+        <div class="stack-layer-title serif">Tools</div>
+        <ul class="stack-list">
+          <li>ChatGPT + custom instructions</li>
+          <li>Claude + memory</li>
+          <li>Gemini</li>
+          <li>custom skills</li>
+          <li>MCP servers</li>
+          <li>Ornament (labs interpretation)</li>
+        </ul>
+      </div>
+      <div class="stack-layer">
+        <div class="stack-layer-label">Layer 03</div>
+        <div class="stack-layer-title serif">Skills</div>
+        <ul class="stack-list">
+          <li>health_research</li>
+          <li>hypothesis_check</li>
+          <li>data_flywheel</li>
+          <li>insight_engine</li>
+          <li>pattern_detector</li>
+          <li>habit_loop_builder</li>
+        </ul>
+      </div>
+      <div class="stack-layer" style="border-right: none;">
+        <div class="stack-layer-label">Layer 04</div>
+        <div class="stack-layer-title serif">Output</div>
+        <ul class="stack-list">
+          <li>health portrait doc</li>
+          <li>single actionable insight</li>
+          <li>personal stack map</li>
+          <li>7-day commitment</li>
+          <li>prototype (optional)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 07 · HOSTS
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="hosts" class="section">
+  <div class="bg-anatomy">
+    <img src="assets/bg-hand.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container">
+    <div class="section-label">§ 07 · Ведущие</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 8px;">Кто ведёт.</h2>
+    <p style="color: var(--muted); font-size: 14px;">
+      Каждый уже собрал свою личную операционную систему здоровья.
+      Не теоретически — на своих данных, годами. Ведём как операторы, не как коучи.
+    </p>
+    <div class="hosts-grid">
+      <div class="host-card">
+        <div class="host-sigil">О</div>
+        <div class="host-name serif">Оля Конышева</div>
+        <div class="host-handle">@olly_konnichiwa</div>
+        <div class="host-credentials">
+          <p>Сертифицированный нутрициолог (ACLM)</p>
+          <p>Инструктор дыхательных практик (метод Дэна Брюле)</p>
+          <p>PM в IT (Яндекс) · автор @nontoxic_productivity</p>
+          <p>Фасилитатор @t4s_space · марафонец</p>
+          <p style="margin-top: 10px; color: var(--red);">Биовозраст по WHOOP — минус 12 лет</p>
+        </div>
+      </div>
+      <div class="host-card">
+        <div class="host-sigil">И</div>
+        <div class="host-name serif">Илья Гиндин</div>
+        <div class="host-handle">@igindin · @gindinthecreator</div>
+        <div class="host-credentials">
+          <p>Основатель t4s.space — фокус-сообщество</p>
+          <p>Основатель comulabs.com · founding member Collaba</p>
+          <p>1.5 года с WHOOP, HRV ~100 мс (иногда 150+)</p>
+          <p>Строит OpenHealth — open-source personal HealthOS</p>
+          <p style="margin-top: 10px; color: var(--red);">Публично разбирает данные в @gindinthecreator</p>
+        </div>
+      </div>
+      <div class="host-card">
+        <div class="host-sigil">Т</div>
+        <div class="host-name serif">Тоня Жукова</div>
+        <div class="host-handle">@zhuuki</div>
+        <div class="host-credentials">
+          <p>Строит персональный health-стек: биомаркеры, носимые, AI-интерпретации</p>
+          <p>Кейс на С2 — workshop 75 мин: personal data layer изнутри</p>
+          <p style="margin-top: 10px; color: var(--red);">Confirmed speaker · C2 · 4 июня</p>
+        </div>
+      </div>
+      <div class="host-card">
+        <div class="host-sigil">АП</div>
+        <div class="host-name serif">Александр Поваляев</div>
+        <div class="host-handle">@alex_named</div>
+        <div class="host-credentials">
+          <p>Основатель AI Mindset — operator-community.</p>
+          <p>4+ спринта (x26, ai-native, pos, self-dev). Host: структура, нетворк, cross-session.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 08 · SPEAKERS REGISTRY
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="speakers" class="section">
+  <div class="container">
+    <div class="section-label">§ 08 · Speaker Registry</div>
+    <h2 class="serif" style="font-size: var(--size-h2); font-weight: 500; margin-bottom: 4px;">Спикеры.</h2>
+    <p class="mono" style="font-size: 12px; color: var(--muted);">Confirmed · in-negotiation · open</p>
+    <table class="speakers-table">
+      <thead>
+        <tr>
+          <th>Speaker</th>
+          <th>Channel</th>
+          <th>Slot</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="speaker-name">Тоня Жукова</td>
+          <td>@zhuuki</td>
+          <td>C2 · data layer · 4 июня</td>
+          <td class="status-confirmed">confirmed ✓</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mono" style="font-size: 13px; color: var(--muted); margin-top: 16px;">Финальный лайнап спикеров — за 14 дней до старта.</p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 09 · PRICING
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="section-label">§ 09 · Цена</div>
+    <div class="pricing-grid">
+      <div class="pricing-card featured">
+        <div class="heart-icon">♥</div>
+        <div class="pricing-tier">Early Bird</div>
+        <div class="pricing-amount serif">€190</div>
+        <div class="pricing-note mono">Для участников health-чата AIM и хакатона</div>
+        <ul class="pricing-includes">
+          <li>Все 6 сессий (вт/чт 17:00 + выходные)</li>
+          <li>Focus-сессия (body doubling)</li>
+          <li>7-day live test / Challenge</li>
+          <li>Чат участников + доступ к материалам</li>
+          <li>Записи навсегда</li>
+          <li>Office hours после C2 и C4</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <div class="heart-icon" style="color: var(--sepia);">◯</div>
+        <div class="pricing-tier">Стандарт</div>
+        <div class="pricing-amount serif">€290</div>
+        <div class="pricing-note mono">Открытый доступ</div>
+        <ul class="pricing-includes">
+          <li>Все 6 сессий (вт/чт 17:00 + выходные)</li>
+          <li>Focus-сессия (body doubling)</li>
+          <li>7-day live test / Challenge</li>
+          <li>Чат участников + доступ к материалам</li>
+          <li>Записи навсегда</li>
+          <li>Office hours после C2 и C4</li>
+        </ul>
+      </div>
+    </div>
+    <p class="mono" style="font-size: 13px; color: var(--muted); margin-top: 20px;">
+      Скидка по реферальной ссылке — 20% (действует для обоих тарифов)
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 10 · FAQ
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-label">§ 10 · Часто задают</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q serif"><span class="roman">I.</span>Нужен ли Claude Code или технический бэкграунд?</div>
+        <div class="faq-a">Нет. Мы работаем с тем, что есть у каждого: телефоном, анализами, данными из приложений. Инструменты подберём под задачу — научим и инструменту, и стеку. Цель не вайбкодить, а собрать рабочую систему на своих данных.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif"><span class="roman">II.</span>Что если у меня нет WHOOP или Oura?</div>
+        <div class="faq-a">Не нужно. Начнём с нуля и покажем, что можно сделать без специальных девайсов — телефон и дневник. К концу ты поймёшь, нужен ли тебе гаджет вообще, и если да — какой именно.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif"><span class="roman">III.</span>AI советует по медицине?</div>
+        <div class="faq-a">Нет. AI помогает увидеть паттерны в твоих данных и задавать правильные вопросы. Все медицинские решения — только с врачом. Это ключевой принцип спринта.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif"><span class="roman">IV.</span>Что такое 7-day live test?</div>
+        <div class="faq-a">Обязательная часть второй недели: ты формулируешь один инсайт и коммитишься на одно изменение. Ежедневный чекин в группе — «сделал / не сделал / что заметил». Группа держит. Без жёстких требований, но со структурой.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q serif"><span class="roman">V.</span>Prototype-track — обязательно?</div>
+        <div class="faq-a">Нет, опционально. Для тех, кто думает в продукт: параллельно программе собираешь прототип на базе того, что нашёл о себе. Шаблон: brief → data sources → insight prompt → habit loop → validation. На Demo Day — 3 минуты питча группе.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     § 11 · ENROLLMENT — FINAL CTA
+══════════════════════════════════════════════════════════════════════════ -->
+<section id="enrollment" class="section" style="padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(80px, 10vw, 140px);">
+  <div class="bg-anatomy">
+    <img src="assets/bg-fullbody.png" alt="" aria-hidden="true">
+  </div>
+  <div class="container" style="text-align: center;">
+    <div class="section-label" style="justify-content: center;">
+      § 11 · Запись
+    </div>
+    <div class="enrollment-headline display">
+      Начни с самого сложного клиента — себя.
+    </div>
+    <div class="enrollment-body">
+      Данные уже есть — анализы, телефон или просто готовность начать.
+      Этого достаточно, чтобы найти что-то новое про себя.
+      <br><br>
+      Когда ты это сделал на себе — ты умеешь делать это для кого угодно.
+    </div>
+    <a href="https://t.me/ai_mind_set_team" target="_blank" rel="noopener" class="cta-bracket red-cta" style="font-size: clamp(16px, 1.8vw, 22px); padding: 16px 40px;">
+      [ записаться на спринт ]
+    </a>
+    <div class="hero-meta" style="margin-top: 20px;">
+      2 июня 2026 · 2 недели · €190 / €290
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-logo">
+    <img src="assets/aim-logo.png" alt="AI Mindset">
+    <a href="https://aimindset.org" class="footer-brand serif">AI Mindset</a>
+  </div>
+  <nav class="footer-links">
+    <a href="https://aimindset.org">aimindset.org</a>
+    <a href="https://t.me/aimindset">Telegram канал</a>
+    <a href="https://space-health-sprint.netlify.app">Health Sprint</a>
+    <a href="mailto:info@aimindset.org">info@aimindset.org</a>
+  </nav>
+  <div class="footer-copy serif">© AI Mindset 2026 · Health Sprint</div>
+</footer>
+
+</body>
+</html>
