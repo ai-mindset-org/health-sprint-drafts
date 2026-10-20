@@ -1,3 +1,4 @@
 .DS_Store
 *.toml
 Thumbs.db
+.worktrees/
