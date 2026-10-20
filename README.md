@@ -1,5 +1,9 @@
 # Health Sprint — Visual Direction Drafts
 
+<!-- aim-public-links:start -->
+[Лабы AI Mindset](https://aimindset.org/?utm_source=website&utm_medium=article&utm_campaign=start&utm_content=github-health-sprint-drafts#learning) · [База знаний](https://base.aimindset.org/?utm_source=website&utm_medium=article&utm_campaign=start&utm_content=github-health-sprint-drafts)
+<!-- aim-public-links:end -->
+
 3 design directions for AI Mindset Health Sprint (2–14 June 2026).
 
 ## Directions
